@@ -10,9 +10,9 @@ import { CommandData, EventData, VoiceData } from "./types/klown"
 
 export class Klown extends Client<boolean> {
 	private restCommands: RESTPostAPIApplicationCommandsJSONBody[] = []
-	public readonly commands: Map<string, CommandData> = new Map()
-	public readonly events: Map<string, EventData> = new Map()
-	public readonly voiceManager: Map<string, VoiceData> = new Map()
+	public commands: Map<string, CommandData> = new Map()
+	public events: Map<string, EventData> = new Map()
+	public voiceManager: Map<string, VoiceData> = new Map()
 
 	constructor() {
 		super({ intents: [ GatewayIntentBits.GuildMembers, GatewayIntentBits.Guilds ] })
