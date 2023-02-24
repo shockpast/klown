@@ -1,6 +1,6 @@
-import { Client, Guild, GuildMember, User } from "discord.js"
+import type { Client, Guild, GuildMember, User } from "discord.js"
 
-import { Klown } from "."
+import type { Klown } from "."
 
 export default class Utils {
 	private client: Klown | Client | undefined

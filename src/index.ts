@@ -7,7 +7,7 @@ import { Client, GatewayIntentBits, REST, RESTPostAPIApplicationCommandsJSONBody
 
 import Utils from "./utils"
 import Assert from "./assert"
-import { CommandData, EventData, VoiceData } from "./types/klown"
+import type { CommandData, EventData, VoiceData } from "./types/klown"
 
 export class Klown extends Client<boolean> {
 	private restCommands: RESTPostAPIApplicationCommandsJSONBody[] = []

@@ -1,7 +1,7 @@
 import { ChannelType, ChatInputCommandInteraction, Colors, EmbedBuilder, SlashCommandBuilder, VoiceChannel } from "discord.js"
 
 import { client } from "../.."
-import { VoiceData } from "../../types/klown"
+import type { VoiceData } from "../../types/klown"
 
 module.exports = {
 	data: new SlashCommandBuilder()
