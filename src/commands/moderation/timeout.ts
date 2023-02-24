@@ -1,5 +1,6 @@
 import { ChatInputCommandInteraction, Colors, EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder } from "discord.js"
-import { client } from "../.."
+
+import { utils } from "../.."
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -24,7 +25,7 @@ module.exports = {
 		const duration = ctx.options.getNumber("duration")
 		const reason = ctx.options.getString("reason") || undefined
 
-		const member = await client.guilds.cache.get(ctx.guild?.id!)?.members.fetch({ user: user! })
+		const member = await utils.getMember(user!, { id: ctx.guild?.id })
 
 		await member?.timeout(duration, reason).catch(async(e) => {
 			if (e) {
