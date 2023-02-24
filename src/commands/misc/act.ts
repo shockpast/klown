@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, Colors, SlashCommandBuilder, EmbedBuilder } from "discord.js"
 import phin from "phin"
 
-import { utils } from "../.."
+import { assert } from "../.."
 
 const responses: Record<string, string> = {
 	"kiss": "{0} поцеловал {1}",
@@ -36,7 +36,7 @@ module.exports = {
 	async execute(ctx: ChatInputCommandInteraction) {
 		const data = await phin({ url: `https://nekos.best/api/v2/${ctx.options.getString("action")}` })
 
-		if (utils.true(data.statusCode != 200)) return await ctx.reply({
+		if (assert.truthy(data.statusCode != 200)) return await ctx.reply({
 			content: "АПИ сдохла, помянем.",
 			ephemeral: true
 		})
