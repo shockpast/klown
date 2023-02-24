@@ -33,7 +33,7 @@ export class Klown extends Client<boolean> {
 
 				const command: CommandData = await import(`./commands/${folder}/${file}`)
 
-				if (!("data" in command)) continue
+				if (!("data" in command.default)) continue
 
 				this.commands.set(command.default.data.name, command)
 				this.restCommands.push(command.default.data.toJSON())
