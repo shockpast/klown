@@ -32,4 +32,38 @@ export class Utils {
 
 		return undefined
 	}
+
+	/**
+	 * Checks if `type` is equals `expected_type`
+	 *
+	 * @param type Actual type that is.
+	 * @param expected_type Type that was expected to be.
+	 * @returns
+	 */
+	public isType(type: any, expected_type: any): boolean {
+		return typeof(type) == expected_type
+	}
+
+	/**
+	 * Checks if `instance` is instanceof
+	 * `expected_instance`
+	 *
+	 * @param instance Actual instance that is.
+	 * @param expected_instance Instance that was expected to be.
+	 * @returns
+	 */
+	public isInstanceOf(instance: any, expected_instance: any): boolean {
+		return instance instanceof expected_instance
+	}
+
+	/**
+	 * Checks if `arg1` equals to `expected_arg2`
+	 *
+	 * @param arg1 Actual value that is.
+	 * @param expected_arg2 Value that was expected to be.
+	 * @returns
+	 */
+	public is(arg1: any, expected_arg2: any): boolean {
+		return arg1 == expected_arg2
+	}
 }
