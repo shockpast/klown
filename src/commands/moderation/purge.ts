@@ -20,7 +20,8 @@ module.exports = {
 						new EmbedBuilder()
 							.setColor(Colors.Blurple)
 							.setDescription(`**${m.size}** сообщения было удалено из <#${ctx.channel?.id}>`)
-					]
+					],
+					ephemeral: true
 				})
 			})
 	}
