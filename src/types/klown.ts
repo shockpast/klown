@@ -15,7 +15,7 @@ export type EventData = {
 
 export type VoiceData = {
 	name: string
-	id: string,
+	id: string
 	private: boolean
 	owner: {
 		name: string
