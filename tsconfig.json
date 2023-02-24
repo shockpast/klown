@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    /* Projects */
+    // none
+
+    /* Language and Environment */
+    "target": "es2016",
+    "lib": ["ES2016"],
+    "moduleDetection": "auto",
+
+    /* Modules */
+    "module": "commonjs",
+    "resolveJsonModule": true,
+
+    /* JavaScript Support */
+    // none
+
+    /* Emit */
+    // none
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true
+  }
+}

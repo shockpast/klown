@@ -1,0 +1,23 @@
+{
+  "name": "canary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node ./src/index.ts --no-warnings",
+    "start:watch": "ts-node ./src/index.ts --watch --no-warnings"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "phin": "^3.7.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.3",
+    "@types/node": "^18.14.0"
+  }
+}
