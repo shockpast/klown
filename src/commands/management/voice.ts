@@ -3,8 +3,6 @@ import { ChannelType, ChatInputCommandInteraction, Colors, EmbedBuilder, SlashCo
 import { client } from "../.."
 import { VoiceData } from "../../types/klown"
 
-// poorly-written implementation
-// todo: huge refactor
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("voice")
