@@ -5,7 +5,8 @@ import { client } from "../.."
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("ping")
-		.setDescription("Пинг-Понг!"),
+		.setDescription("Пинг-Понг!")
+		.setDMPermission(true),
 	async execute(ctx: ChatInputCommandInteraction) {
 		return await ctx.reply({
 			embeds: [

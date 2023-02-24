@@ -6,6 +6,7 @@ module.exports = {
 		.setName("timeout")
 		.setDescription("Выдать тайм-аут пользователю.")
 		.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+		.setDMPermission(false)
 		.addUserOption(opt =>
 			opt.setName("user")
 				.setDescription("Пользователь.")

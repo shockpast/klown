@@ -3,7 +3,8 @@ import { ChatInputCommandInteraction, Colors, SlashCommandBuilder, EmbedBuilder 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("coin")
-		.setDescription("Орёл или Решка."),
+		.setDescription("Орёл или Решка.")
+		.setDMPermission(true),
 	execute: async(ctx: ChatInputCommandInteraction) => {
 		return await ctx.reply({
 			embeds: [

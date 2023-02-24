@@ -9,6 +9,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("voice")
 		.setDescription("Ассистент для голосовых каналов.")
+		.setDMPermission(false)
 		.addSubcommand(sub =>
 			sub.setName("create")
 				.setDescription("Создаёт новый Голосовой Канал.")

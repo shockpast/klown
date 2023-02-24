@@ -5,6 +5,7 @@ module.exports = {
 		.setName("purge")
 		.setDescription("Очистка сообщений.")
 		.setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+		.setDMPermission(false)
 		.addNumberOption(opt =>
 			opt.setName("amount")
 				.setDescription("Количество сообщений.")

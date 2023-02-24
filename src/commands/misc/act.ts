@@ -14,6 +14,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("act")
 		.setDescription("Взаимодействия с пользователями.")
+		.setDMPermission(false)
 		.addStringOption(opt =>
 			opt.setName("action")
 				.setDescription("Действие.")
