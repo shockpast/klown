@@ -2,7 +2,7 @@ import { Client, Guild, GuildMember, User } from "discord.js"
 
 import { Klown } from "."
 
-export class Utils {
+export default class Utils {
 	private client: Klown | Client | undefined
 
 	/**
