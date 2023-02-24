@@ -1,6 +1,6 @@
-import { EmbedBuilder } from "@discordjs/builders"
-import { ChatInputCommandInteraction, Colors, PermissionFlagsBits, SlashCommandBuilder, TextChannel, ThreadChannel, VoiceChannel } from "discord.js"
-import { utils } from "../.."
+import { ChatInputCommandInteraction, Colors, PermissionFlagsBits, SlashCommandBuilder, EmbedBuilder, TextChannel, ThreadChannel, VoiceChannel } from "discord.js"
+
+import { assert } from "../.."
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,9 +19,9 @@ module.exports = {
 
 		const duration = ctx.options.getNumber("time")!
 
-		if (!utils.isType(ctx.channel, TextChannel) ||
-			!utils.isType(ctx.channel, ThreadChannel) ||
-			!utils.isType(ctx.channel, VoiceChannel)) return ctx.reply({
+		if (!assert.isType(ctx.channel, TextChannel) ||
+			!assert.isType(ctx.channel, ThreadChannel) ||
+			!assert.isType(ctx.channel, VoiceChannel)) return ctx.reply({
 				content: "Этот тип каналов не поддерживает возможность задержки между сообщениями.",
 				ephemeral: true
 			})
