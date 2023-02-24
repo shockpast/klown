@@ -9,7 +9,7 @@ module.exports = {
 	},
 	execute: async(ctx: Interaction) => {
 		try {
-			if (ctx.isChatInputCommand()) return client.commands.get(ctx.commandName)?.execute(ctx)
+			if (ctx.isChatInputCommand()) return client.commands.get(ctx.commandName)?.default.execute(ctx)
 		} catch(error) {
 			if (!error || !(error instanceof Error) || !ctx.isRepliable()) return
 

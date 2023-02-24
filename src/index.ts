@@ -35,8 +35,8 @@ export class Klown extends Client<boolean> {
 
 				if (!("data" in command)) continue
 
-				this.commands.set(command.data.name, command)
-				this.restCommands.push(command.data.toJSON())
+				this.commands.set(command.default.data.name, command)
+				this.restCommands.push(command.default.data.toJSON())
 			}
 		}
 
@@ -50,10 +50,10 @@ export class Klown extends Client<boolean> {
 
 			const event: EventData = await import(`./events/${file}`)
 
-			if (!("data" in event)) continue
+			if (!("data" in event.default)) continue
 
-			this.events.set(event.data.name, event)
-			event.data.once ? this.once(event.data.name, event.execute) : this.on(event.data.name, event.execute)
+			this.events.set(event.default.data.name, event)
+			event.default.data.once ? this.once(event.default.data.name, event.default.execute) : this.on(event.default.data.name, event.default.execute)
 		}
 	}
 

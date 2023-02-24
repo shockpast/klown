@@ -1,16 +1,20 @@
 import type { SlashCommandBuilder } from "discord.js"
 
 export type CommandData = {
-	data: SlashCommandBuilder
-	execute: any // explicitly it's function
+	default: {
+		data: SlashCommandBuilder
+		execute: any // explicitly it's function
+	}
 }
 
 export type EventData = {
-	data: {
-		name: string
-		once: boolean
+	default: {
+		data: {
+			name: string
+			once: boolean
+		}
+		execute: any // explicitly it's function
 	}
-	execute: any // explicitly it's function
 }
 
 export type VoiceData = {
