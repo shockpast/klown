@@ -69,5 +69,5 @@ export class Klown extends Client<boolean> {
 }
 
 export const client = new Klown()
-export const utils = new Utils(client)
 export const assert = new Assert()
+export const utils = new Utils(client)
