@@ -1,7 +1,4 @@
 export default class Assert {
-	constructor() {
-	}
-
 	/**
 	 * Checks if `type` is equals `expected_type`
 	 *
