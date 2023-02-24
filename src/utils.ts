@@ -66,4 +66,24 @@ export class Utils {
 	public is(arg1: any, expected_arg2: any): boolean {
 		return arg1 == expected_arg2
 	}
+
+	/**
+	 * Checks if `arg` equals true.
+	 *
+	 * @param arg Argument that must be true.
+	 * @returns
+	 */
+	public true(arg: any): boolean {
+		return arg == true
+	}
+
+	/**
+	 * Checks if `arg` equals false.
+	 *
+	 * @param arg Argument that must be false.
+	 * @returns
+	 */
+	public false(arg: any): boolean {
+		return arg == false
+	}
 }
