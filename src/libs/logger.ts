@@ -4,7 +4,7 @@ import chalk from "chalk"
 
 import { LoggerLevel, LoggerOptions } from "../types/logger"
 
-export class Logger {
+export default class Logger {
 	// incrementally increases itself in Logger#rotateLogger()
 	//
 	// each time logger rotates, it increases fileIndes, so
@@ -111,7 +111,7 @@ export class Logger {
 		const [_y, _m, _d, h, m, s] = this.getTime()
 		this.rotateLogger(fs.statSync(this.loggerFile).size)
 
-		fs.appendFile(this.loggerFile, this.formatLog("info", args + "\n"), console.error)
+		fs.appendFile(this.loggerFile, this.formatLog("info", args + "\n"), () => {})
 
 		return this.loggerFormat == "json" ?
 			console.log(this.formatLog("info", args)) :
