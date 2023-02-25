@@ -74,9 +74,8 @@ module.exports = {
 				})
 
 				if (_private) {
-					parent?.permissionOverwrites.create(client.guilds.cache.get(ctx.guild?.id!)?.roles.everyone!, {
-						Connect: false
-					})
+					parent?.permissionOverwrites.create(client.guilds.cache.get(ctx.guild?.id!)?.roles.everyone!, { Connect: false })
+					parent?.permissionOverwrites.create(ctx.user, { Connect: true })
 				}
 
 				client.voiceManager.set(ctx.user.id, {
