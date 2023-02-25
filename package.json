@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "tsx . --no-warnings",
-    "start:watch": "tsx . --watch --no-warnings"
+    "start:watch": "tsx . --watch --no-warnings",
+    "logger:test": "tsx ./src/tests/logger.test.ts --no-warnings"
   },
   "keywords": [],
   "author": "",
