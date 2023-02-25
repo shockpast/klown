@@ -5,8 +5,8 @@ dotenv.config()
 
 import { Client, GatewayIntentBits, REST, RESTPostAPIApplicationCommandsJSONBody, Routes } from "discord.js"
 
-import Utils from "./utils"
-import Assert from "./assert"
+import Utils from "./libs/utils"
+import Assert from "./libs/assert"
 import type { CommandData, EventData, VoiceData } from "./types/klown"
 
 export class Klown extends Client<boolean> {
