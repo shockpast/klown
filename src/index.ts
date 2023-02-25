@@ -7,6 +7,7 @@ import { Client, GatewayIntentBits, REST, RESTPostAPIApplicationCommandsJSONBody
 
 import Utils from "./libs/utils"
 import Assert from "./libs/assert"
+import Logger from "./libs/logger"
 import type { CommandData, EventData, VoiceData } from "./types/klown"
 
 export class Klown extends Client<boolean> {
@@ -71,3 +72,8 @@ export class Klown extends Client<boolean> {
 export const client = new Klown()
 export const assert = new Assert()
 export const utils = new Utils(client)
+export const logger = new Logger({
+	fileDir: "./logs/",
+	format: "pretty",
+	maxSize: "5mb"
+})
