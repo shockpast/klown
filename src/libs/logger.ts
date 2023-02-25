@@ -38,7 +38,7 @@ export default class Logger {
 		this.loggerSize = options.maxSize
 
 		const file = `${this.loggerDirectory}${year}_${month}_${day}_${hour}_${minute}_${second}-${"".padEnd(2, "0") + fileIndex}.log`
-		const fileData = this.formatLog("info", "initalized\n")
+		const fileData = this.formatLog("info", "\n")
 
 		// synchronous writing needed for first-time
 		// creating file, because creating and
