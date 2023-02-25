@@ -1,6 +1,6 @@
 import { ActivityType, Events, PresenceUpdateStatus } from "discord.js"
 
-import { client } from ".."
+import { client, logger } from ".."
 
 module.exports = {
 	data: {
@@ -11,6 +11,6 @@ module.exports = {
 		client.user?.setStatus(PresenceUpdateStatus.Idle)
 		client.user?.setPresence({ activities: [{ name: "typescript vibes", type: ActivityType.Listening }] })
 
-		console.log("[dev:events/clientReady] online")
+		logger.info(`${client.user?.username} logged in.`)
 	}
 }
