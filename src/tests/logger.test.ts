@@ -1,5 +1,5 @@
 import { assert } from ".."
-import { Logger } from "../libs/logger"
+import Logger  from "../libs/logger"
 
 const logger = new Logger({
 	fileDir: "./logs/",
