@@ -5,13 +5,6 @@ import chalk from "chalk"
 import { LoggerLevel, LoggerOptions } from "../types/logger"
 
 export default class Logger {
-	// incrementally increases itself in Logger#rotateLogger()
-	//
-	// each time logger rotates, it increases fileIndes, so
-	// it's not creating some kind of collision between log
-	// files, and everything is okie-dokie
-	private fileIndex: number = 1
-
 	private loggerFile: string = ""
 	private loggerDirectory: string = ""
 	private loggerFormat: "json" | "pretty" = "pretty"
@@ -22,7 +15,7 @@ export default class Logger {
 		this.loggerFormat = options.format
 		this.loggerSize = options.maxSize
 
-		this.createLogger(options, this.fileIndex)
+		this.createLogger(options)
 	}
 
 	/**
@@ -30,14 +23,14 @@ export default class Logger {
 	 *
 	 * @param options Options for Logger.
 	 */
-	private createLogger(options: LoggerOptions, fileIndex?: number): Logger {
+	private createLogger(options: LoggerOptions): Logger {
 		const [year, month, day, hour, minute, second] = this.getTime()
 
 		this.loggerDirectory = options.fileDir
 		this.loggerFormat = options.format
 		this.loggerSize = options.maxSize
 
-		const file = `${this.loggerDirectory}${year}_${month}_${day}_${hour}_${minute}_${second}-${"".padEnd(2, "0") + fileIndex}.log`
+		const file = `${this.loggerDirectory}${year}_${month}_${day}_${hour}-${minute}-${second}.log`
 		const fileData = this.formatLog("info", "\n")
 
 		// synchronous writing needed for first-time
@@ -61,9 +54,9 @@ export default class Logger {
 	private rotateLogger(size: number): Logger | undefined {
 		const options: LoggerOptions = { fileDir: this.loggerDirectory, format: this.loggerFormat, maxSize: this.loggerSize }
 
-		if (this.loggerSize == "1mb" && size >= 1000000) return this.createLogger(options, ++this.fileIndex)
-		if (this.loggerSize == "5mb" && size >= 5000000) return this.createLogger(options, ++this.fileIndex)
-		if (this.loggerSize == "10mb" && size >= 10000000) return this.createLogger(options, ++this.fileIndex)
+		if (this.loggerSize == "1mb" && size >= 1000000) return this.createLogger(options)
+		if (this.loggerSize == "5mb" && size >= 5000000) return this.createLogger(options)
+		if (this.loggerSize == "10mb" && size >= 10000000) return this.createLogger(options)
 
 		return undefined
 	}
