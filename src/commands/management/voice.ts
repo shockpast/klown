@@ -58,7 +58,7 @@ module.exports = {
 				const name = ctx.options.getString("name")
 				const _private = ctx.options.getBoolean("private")
 
-				if (client.voiceManager.get(ctx.user.id)) return await ctx.reply({
+				if (client.manager.voice.get(ctx.user.id)) return await ctx.reply({
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Red)
@@ -78,7 +78,7 @@ module.exports = {
 					parent?.permissionOverwrites.create(ctx.user, { Connect: true })
 				}
 
-				client.voiceManager.set(ctx.user.id, {
+				client.manager.voice.set(ctx.user.id, {
 					name: name!,
 					id: parent?.id!,
 					private: !!_private,
@@ -107,7 +107,7 @@ module.exports = {
 				const allowedUser = ctx.options.getUser("allowed_user")
 				const disallowedUser = ctx.options.getUser("disallowed_user")
 
-				const userChannel = client.voiceManager.get(ctx.user.id)
+				const userChannel = client.manager.voice.get(ctx.user.id)
 				const voiceChannel = client.channels.cache.get(userChannel?.id!) as VoiceChannel
 
 				if (!voiceChannel) return await ctx.reply({
@@ -144,7 +144,7 @@ module.exports = {
 				const embed = new EmbedBuilder()
 					.setColor(Colors.Blurple)
 
-				client.voiceManager.forEach((v) => {
+				client.manager.voice.forEach((v) => {
 					if (v.guild.id == ctx.guild?.id)
 						embed.addFields(
 							{ name: `<#${v.id}>`, value: `<@!${v.owner.id}>`, inline: true }
@@ -167,7 +167,7 @@ module.exports = {
 			}
 
 			case "delete": {
-				const userChannel = client.voiceManager.get(ctx.user.id)
+				const userChannel = client.manager.voice.get(ctx.user.id)
 				const voiceChannel = client.channels.cache.get(userChannel?.id!) as VoiceChannel
 
 				if (!voiceChannel) return await ctx.reply({
@@ -180,7 +180,7 @@ module.exports = {
 				})
 
 				await voiceChannel.delete()
-				client.voiceManager.delete(ctx.user.id)
+				client.manager.voice.delete(ctx.user.id)
 
 				return await ctx.reply({
 					embeds: [

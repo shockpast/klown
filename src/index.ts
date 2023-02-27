@@ -14,7 +14,7 @@ export class Klown extends Client<boolean> {
 	private restCommands: RESTPostAPIApplicationCommandsJSONBody[] = []
 	public commands: Map<string, CommandData> = new Map()
 	public events: Map<string, EventData> = new Map()
-	public voiceManager: Map<string, VoiceData> = new Map()
+	public manager: { voice: Map<string, VoiceData> } = { voice: new Map() }
 
 	constructor() {
 		super({ intents: [ GatewayIntentBits.GuildMembers, GatewayIntentBits.Guilds ] })
