@@ -9,6 +9,7 @@ import Utils from "./libs/utils"
 import Assert from "./libs/assert"
 import Logger from "./libs/logger"
 import type { CommandData, EventData, VoiceData } from "./types/klown"
+import { LoggerOptions } from "./types/logger"
 
 export class Klown extends Client<boolean> {
 	private restCommands: RESTPostAPIApplicationCommandsJSONBody[] = []
@@ -69,11 +70,13 @@ export class Klown extends Client<boolean> {
 	}
 }
 
-export const client = new Klown()
-export const assert = new Assert()
-export const utils = new Utils(client)
-export const logger = new Logger({
+const options = {
 	fileDir: "./logs/",
 	format: "pretty",
 	maxSize: "5mb"
-})
+} satisfies LoggerOptions
+
+export const client = new Klown()
+export const assert = new Assert()
+export const utils = new Utils(client)
+export const logger = new Logger(options)
