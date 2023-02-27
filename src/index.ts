@@ -60,13 +60,8 @@ export class Klown extends Client<boolean> {
 	}
 
 	private async createCache() {
-		this.users.cache.forEach(async(user) => {
-			await user.fetch()
-		})
-
-		this.guilds.cache.forEach(async(guild) => {
-			await guild.members.fetch()
-		})
+		this.users.cache.forEach(async(user) => await user.fetch())
+		this.guilds.cache.forEach(async(guild) => await guild.members.fetch())
 	}
 }
 
