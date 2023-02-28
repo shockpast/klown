@@ -5,20 +5,32 @@ import { utils } from "../.."
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("timeout")
-		.setDescription("Выдать тайм-аут пользователю.")
+		.setDescription("Issue a timeout to the user.")
+		.setDescriptionLocalizations(
+			{ "ru": "Выдать тайм-аут пользователю." }
+		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
 		.setDMPermission(false)
 		.addUserOption(opt =>
 			opt.setName("user")
-				.setDescription("Пользователь.")
+				.setDescription("User.")
+				.setDescriptionLocalizations(
+					{ "ru": "Пользователь." }
+				)
 				.setRequired(true))
 		.addNumberOption(opt =>
 			opt.setName("duration")
-				.setDescription("Длительность тайм-аута (в секундах)")
+				.setDescription("Duration of timeout (in seconds)")
+				.setDescriptionLocalizations(
+					{ "ru": "Длительность тайм-аута (в секундах)" }
+				)
 				.setRequired(true))
 		.addStringOption(opt =>
 			opt.setName("reason")
-				.setDescription("Причина.")
+				.setDescription("Reason.")
+				.setDescriptionLocalizations(
+					{ "ru": "Причина." }
+				)
 				.setRequired(false)),
 	async execute(ctx: ChatInputCommandInteraction) {
 		const user = ctx.options.getUser("user")
@@ -41,7 +53,7 @@ module.exports = {
 				embeds: [
 					new EmbedBuilder()
 						.setColor(Colors.Blurple)
-						.setDescription(`<@!${user?.id}> отправлен в тайм-аут по причине \`${reason}\` на **${duration}** секунд.`)
+						.setDescription(`<@!${user?.id}> were sent to think about his behavior for \`${reason}\` (**${duration}** sec.)`)
 				]
 			})
 		})

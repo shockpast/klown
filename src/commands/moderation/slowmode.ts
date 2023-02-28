@@ -5,12 +5,18 @@ import { assert } from "../.."
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("slowmode")
-		.setDescription("Устанавливает задержку между сообщениями.")
+		.setDescription("Sets the delay between messages.")
+		.setDescriptionLocalizations(
+			{ "ru": "Устанавливает задержку между сообщениями." }
+		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
 		.setDMPermission(false)
 		.addNumberOption(opt =>
 			opt.setName("time")
-				.setDescription("Время (в секундах)")
+				.setDescription("Time (in seconds)")
+				.setDescriptionLocalizations(
+					{ "ru": "Время (в секундах)" }
+				)
 				.setRequired(true)
 				.setMinValue(0)
 				.setMaxValue(21600)),
@@ -22,7 +28,7 @@ module.exports = {
 		if (!assert.isType(ctx.channel, TextChannel) ||
 			!assert.isType(ctx.channel, ThreadChannel) ||
 			!assert.isType(ctx.channel, VoiceChannel)) return ctx.reply({
-				content: "Этот тип каналов не поддерживает возможность задержки между сообщениями.",
+				content: "This type of channel does not support setting a slowmode in them.",
 				ephemeral: true
 			})
 
@@ -33,8 +39,8 @@ module.exports = {
 				new EmbedBuilder()
 					.setColor(Colors.Blurple)
 					.setDescription(duration > 0
-						? "Задержка между сообщениями теперь составляет \`" + duration + "\` секунд."
-						: "Задержка между сообщениями была убрана.")
+						? "As you wish. \`" + duration + "\` sec."
+						: "Slowmode was disabled.")
 			]
 		})
 	}

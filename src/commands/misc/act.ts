@@ -15,31 +15,37 @@ const responses: Record<string, string> = {
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("act")
-		.setDescription("Взаимодействия с пользователями.")
+		.setDescription("Interactions with users.")
+		.setDescriptionLocalizations(
+			{ "ru": "Взаимодействия с пользователями." }
+		)
 		.setDMPermission(false)
 		.addStringOption(opt =>
 			opt.setName("action")
-				.setDescription("Действие.")
+				.setDescription("Interaction.")
+				.setDescriptionLocalizations(
+					{ "ru": "Действие." }
+				)
 				.addChoices(
-					{ name: "Поцеловать", value: "kiss" },
-					{ name: "Дай Пять!", value: "highfive" },
-					{ name: "Укусить", value: "bite" },
-					{ name: "Пощекотать", value: "tickle" },
-					{ name: "Тыкнуть", value: "poke" },
-					{ name: "Похлопать", value: "pat" },
+					{ name: "Kiss", value: "kiss", name_localizations: { "ru": "Поцеловать" }  },
+					{ name: "Highfive!", value: "highfive", name_localizations: { "ru": "Дай Пять!" } },
+					{ name: "Bite", value: "bite", name_localizations: { "ru": "Укусить" } },
+					{ name: "Tickle", value: "tickle", name_localizations: { "ru": "Пощекотать" } },
+					{ name: "Poke", value: "poke", name_localizations: { "ru": "Тыкнуть" } },
+					{ name: "Pat", value: "pat", name_localizations: { "ru": "Похлопать" } },
 				)
 				.setRequired(true))
 		.addUserOption(opt =>
 			opt.setName("user")
-				.setDescription("Пользователь.")
+				.setDescription("User.")
+				.setDescriptionLocalizations(
+					{ "ru": "Пользователь." }
+				)
 				.setRequired(true)),
 	async execute(ctx: ChatInputCommandInteraction) {
 		const data = await phin({ url: `https://nekos.best/api/v2/${ctx.options.getString("action")}` })
 
-		if (assert.truthy(data.statusCode != 200)) return await ctx.reply({
-			content: "АПИ сдохла, помянем.",
-			ephemeral: true
-		})
+		if (assert.truthy(data.statusCode != 200)) return
 
 		const result = JSON.parse(data.body.toString("utf-8")).results[0]
 

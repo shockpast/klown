@@ -5,16 +5,25 @@ import { utils } from "../.."
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("kick")
-		.setDescription("Выгоняет пользователя с сервера.")
+		.setDescription("Kicks a member from the guild.")
+		.setDescriptionLocalizations(
+			{ "ru": "Выгоняет пользователя с сервера." }
+		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
 		.setDMPermission(false)
 		.addUserOption(opt =>
 			opt.setName("user")
-				.setDescription("Пользователь.")
+				.setDescription("User.")
+				.setDescriptionLocalizations(
+					{ "ru": "Пользователь." }
+				)
 				.setRequired(true))
 		.addStringOption(opt =>
 			opt.setName("reason")
-				.setDescription("Причина.")
+				.setDescription("Reason.")
+				.setDescriptionLocalizations(
+					{ "ru": "Причина." }
+				)
 				.setRequired(false)),
 	async execute(ctx: ChatInputCommandInteraction) {
 		const user = ctx.options.getUser("user")
@@ -24,12 +33,12 @@ module.exports = {
 		const self = await utils.getMember(ctx.user, { id: ctx.guild?.id })
 
 		if (!member?.kickable) return await ctx.reply({
-			content: `<@!${user?.id}> не может быть выгнан.`,
+			content: `<@!${user?.id}> couldn't be kicked.`,
 			ephemeral: true
 		})
 
 		if (member.roles.highest.position > self?.roles.highest.position!) return await ctx.reply({
-			content: `<@!${user?.id}> имеет роль выше чем ваша, вы не сможете его выгнать.`,
+			content: `<@!${user?.id}> role's position is higher than yours.`,
 			ephemeral: true
 		})
 
@@ -48,7 +57,7 @@ module.exports = {
 			embeds: [
 				new EmbedBuilder()
 					.setColor(Colors.Blurple)
-					.setDescription(`<@!${user?.id}> был выгнан по причине **${reason}**`)
+					.setDescription(`<@!${user?.id}> was kicked for **${reason}**`)
 			]
 		})
 	}

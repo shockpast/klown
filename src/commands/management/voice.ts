@@ -6,50 +6,86 @@ import type { VoiceData } from "../../types/klown"
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("voice")
-		.setDescription("Ассистент для голосовых каналов.")
+		.setDescription("Assistant for Voice Channel Managing.")
+		.setDescriptionLocalizations(
+			{ "ru": "Ассистент для голосовых каналов." }
+		)
 		.setDMPermission(false)
 		.addSubcommand(sub =>
 			sub.setName("create")
-				.setDescription("Создаёт новый Голосовой Канал.")
+				.setDescription("Creates a Voice Channel.")
+				.setDescriptionLocalizations(
+					{ "ru": "Создаёт новый Голосовой Канал." }
+				)
 				.addStringOption(opt =>
 					opt.setName("name")
-						.setDescription("Название.")
+						.setDescription("Name.")
+						.setDescriptionLocalizations(
+							{ "ru": "Название." }
+						)
 						.setRequired(true))
 				.addBooleanOption(opt =>
 					opt.setName("private")
-						.setDescription("Запрещает входить всем, кроме вас.")
+						.setDescription("Forbids anyone but you to enter.")
+						.setDescriptionLocalizations(
+							{ "ru": "Запрещает входить всем, кроме вас." }
+						)
 						.setRequired(false)))
 		.addSubcommand(sub =>
 			sub.setName("modify")
-				.setDescription("Модифицирование Голосового Канала.")
+				.setDescription("Modifies Voice Channel.")
+				.setDescriptionLocalizations(
+					{ "ru": "Модифицирование Голосового Канала." }
+				)
 				.addStringOption(opt =>
 					opt.setName("name")
-						.setDescription("Название.")
+						.setDescription("Name.")
+						.setDescriptionLocalizations(
+							{ "ru": "Название." }
+						)
 						.setRequired(false))
 				.addNumberOption(opt =>
 					opt.setName("max_members")
-						.setDescription("Максимальное кол-во пользователей.")
+						.setDescription("Maximum Members in Voice Channel.")
+						.setDescriptionLocalizations(
+							{ "ru": "Максимальное кол-во пользователей." }
+						)
 						.setRequired(false)
 						.setMinValue(1)
 						.setMaxValue(99))
 				.addBooleanOption(opt =>
 					opt.setName("private")
-						.setDescription("Запрещает или разрешает входить всем, кроме вас.")
+						.setDescription("Forbids or allows anyone but you to enter.")
+						.setDescriptionLocalizations(
+							{ "ru": "Запрещает или разрешает входить всем, кроме вас." }
+						)
 						.setRequired(false))
 				.addUserOption(opt =>
 					opt.setName("allowed_user")
-						.setDescription("Пользователь который сможет подключиться.")
+						.setDescription("A user who will be able to connect.")
+						.setDescriptionLocalizations(
+							{ "ru": "Пользователь который сможет подключиться." }
+						)
 						.setRequired(false))
 				.addUserOption(opt =>
 					opt.setName("disallowed_user")
-						.setDescription("Пользователь который не сможет подключиться.")
+						.setDescription("A user who will not be able to connect.")
+						.setDescriptionLocalizations(
+							{ "ru": "Пользователь который не сможет подключиться." }
+						)
 						.setRequired(false)))
 		.addSubcommand(sub =>
 			sub.setName("delete")
-				.setDescription("Удаляет Голосовой Канал"))
+				.setDescription("Annihilates Voice Channel."))
+				.setDescriptionLocalizations(
+					{ "ru": "Удаляет Голосовой Канал." }
+				)
 		.addSubcommand(sub =>
 			sub.setName("list")
-				.setDescription("Показывает все Голосовые Каналы созданные на этом сервере.")),
+				.setDescription("Lists all Voice Channel(s) that were created in this Guild.")
+				.setDescriptionLocalizations(
+					{ "ru": "Показывает все Голосовые Каналы созданные на этом сервере." }
+				)),
 	async execute(ctx: ChatInputCommandInteraction) {
 		const subcommand = ctx.options.getSubcommand()
 
@@ -62,7 +98,7 @@ module.exports = {
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Red)
-							.setDescription("Вы уже создавали Голосовой Канал ранее, сначала удалите прошлый и попробуйте снова.")
+							.setDescription("You already created a Voice Channel once, you must to delete previous to create a new one.")
 					],
 					ephemeral: true
 				})
@@ -95,7 +131,7 @@ module.exports = {
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Blurple)
-							.setDescription(`<#${parent?.id}> был создан пользователем <@!${ctx.user.id}>`)
+							.setDescription(`<#${parent?.id}> was created by <@!${ctx.user.id}>`)
 					]
 				})
 			}
@@ -114,7 +150,7 @@ module.exports = {
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Red)
-							.setDescription("Вы ещё не создавали Голосовой Канал, сначала создайте и попробуйте снова!")
+							.setDescription("You didn't created any Voice Channel to modify!")
 					],
 					ephemeral: true
 				})
@@ -132,9 +168,9 @@ module.exports = {
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Blurple)
-							.setDescription(`<#${userChannel?.id}> был успешно изменён.`)
+							.setDescription(`<#${userChannel?.id}> were succesfully modified.`)
 							.addFields(
-								{ name: "Изменения", value: `\`\`\`${ctx.options.data[0].options?.map(i => `${i.name}: ${i.value}\n`)}\`\`\``.replace(",", "") }
+								{ name: "Changes", value: `\`\`\`${ctx.options.data[0].options?.map(i => `${i.name}: ${i.value}\n`)}\`\`\``.replace(",", "") }
 							)
 					]
 				})
@@ -160,7 +196,7 @@ module.exports = {
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Red)
-							.setDescription("На этом сервере, ещё не было создано ни одного голосового канала.")
+							.setDescription("*What a lot of emptiness: not a lot of pushing.*")
 					],
 					ephemeral: true
 				})
@@ -174,7 +210,7 @@ module.exports = {
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Red)
-							.setDescription("Вы ещё не создавали Голосовой Канал, сначала создайте и попробуйте снова!")
+							.setDescription("You didn't created any Voice Channel to delete.")
 					],
 					ephemeral: true
 				})
@@ -186,7 +222,7 @@ module.exports = {
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Blurple)
-							.setDescription(`**${userChannel?.name}** был удалён.`)
+							.setDescription(`**${userChannel?.name}** was deleted.`)
 					]
 				})
 			}

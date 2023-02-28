@@ -2,7 +2,7 @@ import fs from "node:fs"
 
 import chalk from "chalk"
 
-import { LoggerLevel, LoggerOptions } from "../types/logger"
+import type { LoggerLevel, LoggerOptions } from "../types/logger"
 
 export default class Logger {
 	private loggerFile: string = ""
@@ -38,6 +38,7 @@ export default class Logger {
 		// trying to logging in the same will create
 		// an error [enoent] and everything goes poo-poo
 		fs.writeFileSync(file, fileData)
+		fs.watchFile(file, curr => this.rotateLogger(curr.size))
 
 		this.loggerFile = file
 
@@ -70,20 +71,17 @@ export default class Logger {
 	 * @returns {string}
 	 */
 	private formatLog(level: LoggerLevel, message: any): string {
-		const [_y, _m, _d, hour, minute, second] = this.getTime()
+		const [hour, minute, second] = this.getTime().slice(3, 6)
 
 		return this.loggerFormat == "json" ?
 			`{level:"${level}",text:"${message}",time:"${hour}:${minute}:${second}"}` :
 			`[${level.toUpperCase()}]\t${hour}:${minute}:${second}\t${message}`
 	}
 
-	/**
-	 * @returns {(string | number)[]}
-	 */
 	private getTime(): (string | number)[] {
 		function pad(n: number) { return n < 10 ? "0" + n : n }
 
-		let [year, month, day, hour, minute, second] = [
+		const [year, month, day, hour, minute, second] = [
 			pad(new Date().getUTCFullYear()),
 			pad(new Date().getUTCMonth() + 1),
 			pad(new Date().getUTCDate()),
@@ -101,8 +99,7 @@ export default class Logger {
 	//
 	// future me, refactor this pls
 	public info(args: any): void {
-		const [_y, _m, _d, h, m, s] = this.getTime()
-		this.rotateLogger(fs.statSync(this.loggerFile).size)
+		const [h, m, s] = this.getTime().slice(3, 6)
 
 		fs.appendFile(this.loggerFile, this.formatLog("info", args + "\n"), () => {})
 
@@ -112,8 +109,7 @@ export default class Logger {
 	}
 
 	public warn(args: any): void {
-		const [_y, _m, _d, h, m, s] = this.getTime()
-		this.rotateLogger(fs.statSync(this.loggerFile).size)
+		const [h, m, s] = this.getTime().slice(3, 6)
 
 		fs.appendFile(this.loggerFile, this.formatLog("warn", args + "\n"), () => {})
 
@@ -123,8 +119,7 @@ export default class Logger {
 	}
 
 	public error(args: any): void {
-		const [_y, _m, _d, h, m, s] = this.getTime()
-		this.rotateLogger(fs.statSync(this.loggerFile).size)
+		const [h, m, s] = this.getTime().slice(3, 6)
 
 		fs.appendFile(this.loggerFile, this.formatLog("error", args + "\n"), () => {})
 
@@ -134,8 +129,7 @@ export default class Logger {
 	}
 
 	public fatal(args: any): void {
-		const [_y, _m, _d, h, m, s] = this.getTime()
-		this.rotateLogger(fs.statSync(this.loggerFile).size)
+		const [h, m, s] = this.getTime().slice(3, 6)
 
 		fs.appendFile(this.loggerFile, this.formatLog("fatal", args + "\n"), () => {})
 
@@ -145,8 +139,7 @@ export default class Logger {
 	}
 
 	public trace(args: any): void {
-		const [_y, _m, _d, h, m, s] = this.getTime()
-		this.rotateLogger(fs.statSync(this.loggerFile).size)
+		const [h, m, s] = this.getTime().slice(3, 6)
 
 		fs.appendFile(this.loggerFile, this.formatLog("trace", args + "\n"), () => {})
 

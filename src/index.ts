@@ -3,13 +3,19 @@ import fs from "node:fs"
 import dotenv from "dotenv"
 dotenv.config()
 
-import { Client, GatewayIntentBits, REST, RESTPostAPIApplicationCommandsJSONBody, Routes } from "discord.js"
+import {
+	Client,
+	GatewayIntentBits,
+	REST,
+	RESTPostAPIApplicationCommandsJSONBody,
+	Routes
+} from "discord.js"
 
 import Utils from "./libs/utils"
 import Assert from "./libs/assert"
 import Logger from "./libs/logger"
 import type { CommandData, EventData, VoiceData } from "./types/klown"
-import { LoggerOptions } from "./types/logger"
+import type { LoggerOptions } from "./types/logger"
 
 export class Klown extends Client<boolean> {
 	private restCommands: RESTPostAPIApplicationCommandsJSONBody[] = []
@@ -31,7 +37,7 @@ export class Klown extends Client<boolean> {
 	private async updateCommands() {
 		for (const folder of fs.readdirSync("./src/commands")) {
 			for (const file of fs.readdirSync(`./src/commands/${folder}`)) {
-				if (!file.endsWith(".ts")) continue
+				if (!file.endsWith(".ts") && __dirname.includes("src")) continue
 
 				const command: CommandData = await import(`./commands/${folder}/${file}`)
 
@@ -65,7 +71,7 @@ export class Klown extends Client<boolean> {
 	}
 }
 
-const options = {
+const loggerOptions = {
 	fileDir: "./logs/",
 	format: "pretty",
 	maxSize: "5mb"
@@ -74,4 +80,4 @@ const options = {
 export const client = new Klown()
 export const assert = new Assert()
 export const utils = new Utils(client)
-export const logger = new Logger(options)
+export const logger = new Logger(loggerOptions)

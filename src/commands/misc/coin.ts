@@ -3,14 +3,17 @@ import { ChatInputCommandInteraction, Colors, SlashCommandBuilder, EmbedBuilder 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("coin")
-		.setDescription("Орёл или Решка.")
+		.setDescription("Heads or Tails.")
+		.setDescriptionLocalizations(
+			{ "ru": "Орёл или Решка." }
+		)
 		.setDMPermission(true),
 	execute: async(ctx: ChatInputCommandInteraction) => {
 		return await ctx.reply({
 			embeds: [
 				new EmbedBuilder()
 					.setColor(Colors.Blurple)
-					.setDescription(Math.random() > .5 ? "Орёл." : "Решка.")
+					.setDescription(Math.random() > .5 ? "Heads." : "Tails.")
 			]
 		})
 	}

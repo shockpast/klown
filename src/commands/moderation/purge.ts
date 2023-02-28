@@ -3,12 +3,18 @@ import { ChatInputCommandInteraction, Colors, EmbedBuilder, PermissionFlagsBits,
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("purge")
-		.setDescription("Очистка сообщений.")
+		.setDescription("Bulk Deletion of messages in channel")
+		.setDescriptionLocalizations(
+			{ "ru": "Очистка сообщений." }
+		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
 		.setDMPermission(false)
 		.addNumberOption(opt =>
 			opt.setName("amount")
-				.setDescription("Количество сообщений.")
+				.setDescription("Amount of messages.")
+				.setDescriptionLocalizations(
+					{ "ru": "Количество сообщений." }
+				)
 				.setRequired(true)
 				.setMinValue(1)
 				.setMaxValue(100)),
@@ -19,7 +25,7 @@ module.exports = {
 					embeds: [
 						new EmbedBuilder()
 							.setColor(Colors.Blurple)
-							.setDescription(`**${m.size}** сообщения было удалено из <#${ctx.channel?.id}>`)
+							.setDescription(`**${m.size}** message(s) were deleted from <#${ctx.channel?.id}>`)
 					],
 					ephemeral: true
 				})
